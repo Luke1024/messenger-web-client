@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConnectorService } from '../connector.service';
 
 @Component({
   selector: 'app-main-view',
@@ -8,19 +9,35 @@ import { Component, OnInit } from '@angular/core';
 export class MainViewComponent implements OnInit {
 
   chatView:boolean = false;
-  loginView:boolean = false;
-  registerView:boolean = false;
+  loginRegisterView:boolean = false;
 
+  userData:boolean = false;
   userNameKey:string = "name";
   userPasswordKey:string = "password";
 
-  constructor() { }
+  constructor(private connector:ConnectorService) { } 
 
   ngOnInit(): void {
-    this.pingServer();
+    this.confirmCookieIsActual();
   }
 
-  private pingServer(){
-    
+  confirmCookieIsActual() {
+    this.connector.ping().subscribe(response => {
+      if(response){
+        this.userAlreadyLoggedIn();
+      } else {
+        this.userLoggedOut();
+      }
+    })
+  }
+
+  private userAlreadyLoggedIn() {
+    this.chatView = true;
+    this.loginRegisterView = false;
+  }
+
+  private userLoggedOut() {
+    this.chatView = false;
+    this.loginRegisterView = true;
   }
 }

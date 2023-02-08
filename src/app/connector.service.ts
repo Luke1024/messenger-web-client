@@ -138,7 +138,7 @@ export class ConnectorService {
     return [] as MessageDto[];
   }
 
-  getLastMessageBatch(conversationId:number):BatchDto {
+  getLastMessageBatch(conversationId:number):Observable<BatchDto> {
     return new Observable(observer => {
       this.http.get<BatchDto>(this.getLastMessageBatchUrl + "/" + conversationId, {observe:'response'})
       .pipe(catchError(this.handleError("get last message batch"))).subscribe(
@@ -149,9 +149,9 @@ export class ConnectorService {
     })
   }
 
-  getMessageBatch(conversationId:number, batchId:number):BatchDto {
+  getMessageBatch(conversationId:number, batchId:number):Observable<BatchDto> {
     return new Observable(observer => {
-      this.http.get<BatchDto>(this.getMessageBatchUrl + "/" + conversationId, {observe:'reponse'})
+      this.http.get<BatchDto>(this.getMessageBatchUrl + "/" + conversationId, {observe:'response'})
       .pipe(catchError(this.handleError("get message batch"))).subscribe(
         response => {
           observer.next(this.getMessageBatchResponse(response))
