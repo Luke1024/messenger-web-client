@@ -94,7 +94,7 @@ export class ConnectorService {
     })      
   }
 
-  getConversationStatus(conversationId:number):Observable<ConversationStatusDto[]> {
+  getConversationStatus():Observable<ConversationStatusDto[]> {
     return new Observable(observer => {
       this.http.get<ConversationStatusDto[]>(this.getConversationStatusUrl + "/" + conversationId, {observe:'response'})
       .pipe(catchError(this.handleError("get conversation status"))).subscribe(
