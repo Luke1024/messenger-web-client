@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 import { ConnectorService } from '../connector.service';
 import { ConversationStatusDto } from '../model/conversation-status-dto';
 import { UserDto } from '../model/user-dto';
@@ -15,10 +16,14 @@ export class ChatUsersComponent implements OnInit {
   userName:string = "";
   usersFound:UserDto[] = [];
 
-  constructor(private connector:ConnectorService) { }
+  constructor(private connector:ConnectorService, private dialog:ChatDialogComponent) { }
 
   ngOnInit(): void {
-    this.getUsersState();
+
+  }
+
+  getConversation(conversationId:number){
+    this.dialog.getConversation(conversationId);
   }
 
   getUsersState(){
