@@ -13,6 +13,8 @@ export class LoginRegisterComponent implements OnInit {
   loginView:boolean = true;
   registerView:boolean = false;
 
+  userDataDto:UserDataDto = {userName:"", password:""};
+
   loginProblem:boolean = false;
   registrationProblem:boolean = false;
 
@@ -36,8 +38,8 @@ export class LoginRegisterComponent implements OnInit {
     this.registrationProblem = false;
   }
 
-  loginUser(userDataDto:UserDataDto) {
-    this.connector.loginUser(userDataDto).subscribe(response => {
+  loginUser() {
+    this.connector.loginUser(this.userDataDto).subscribe(response => {
       if(response){
         this.confirmCookieReceived()
       } else {
@@ -46,8 +48,8 @@ export class LoginRegisterComponent implements OnInit {
     });
   }
 
-  registerUser(userDataDto:UserDataDto) {
-    this.connector.registerUser(userDataDto).subscribe(response => {
+  registerUser() {
+    this.connector.registerUser(this.userDataDto).subscribe(response => {
       if(response){
         this.switchToLogin();
       } else {

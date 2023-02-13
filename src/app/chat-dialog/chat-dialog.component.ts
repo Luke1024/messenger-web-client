@@ -13,9 +13,9 @@ export class ChatDialogComponent implements OnInit {
 
   constructor(private connector:ConnectorService) { }
 
-  private messageBatches:BatchDto[] = []
+  messageBatches:BatchDto[] = []
   private currentConversationId = -1;
-  private message:string = "";
+  message:string = "";
 
   ngOnInit(): void {
   }

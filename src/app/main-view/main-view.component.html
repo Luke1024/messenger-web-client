@@ -1,1 +1,4 @@
-<p>main-view works!</p>
+<div id="view">
+    <app-login-register *ngIf="loginRegisterView" id="loginRegister"></app-login-register>
+    <app-chat *ngIf="chatView" id="chat"></app-chat>
+</div>

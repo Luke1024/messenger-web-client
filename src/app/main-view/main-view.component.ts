@@ -11,10 +11,6 @@ export class MainViewComponent implements OnInit {
   chatView:boolean = false;
   loginRegisterView:boolean = false;
 
-  userData:boolean = false;
-  userNameKey:string = "name";
-  userPasswordKey:string = "password";
-
   constructor(private connector:ConnectorService) { } 
 
   ngOnInit(): void {
