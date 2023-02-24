@@ -16,25 +16,25 @@ export class ConnectorService {
 
   private rootUrl = "http://localhost:8084/";
 
-  private pingUrl = this.rootUrl + "ping";
-  private registerUserUrl = this.rootUrl + "register";
-  private loginUrl = this.rootUrl + "login";
-  private findUserUrl = this.rootUrl + "findUser/";
+  private pingUrl = this.rootUrl + "user/ping";
+  private registerUserUrl = this.rootUrl + "user/register";
+  private loginUrl = this.rootUrl + "user/login";
+  private findUserUrl = this.rootUrl + "user/findUser/";
 
-  private isStatusNewUrl = this.rootUrl + "change";
-  private getConversationStatusUrl = this.rootUrl + "status";
-  private getNewMessagesUrl = this.rootUrl + "new/";
-  private getLastMessageBatchUrl = this.rootUrl + "loadLast/";
-  private getMessageBatchUrl = this.rootUrl + "load/";
-  private sendMessageUrl = this.rootUrl + "send";
-  private addConversationUrl = this.rootUrl + "addConversation";
+  private isStatusNewUrl = this.rootUrl + "message/change";
+  private getConversationStatusUrl = this.rootUrl + "message/status";
+  private getNewMessagesUrl = this.rootUrl + "message/new/";
+  private getLastMessageBatchUrl = this.rootUrl + "message/loadLast/";
+  private getMessageBatchUrl = this.rootUrl + "message/load/";
+  private sendMessageUrl = this.rootUrl + "message/send";
+  private addConversationUrl = this.rootUrl + "message/addConversation";
 
   constructor(private http:HttpClient) { }
 
   //user
   ping():Observable<boolean> {
     return new Observable(observer => {
-      this.http.get<boolean>(this.pingUrl, {observe:'response'}).pipe(catchError(this.handleError("ping"))).subscribe(
+      this.http.get<boolean>(this.pingUrl, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("ping"))).subscribe(
         response => {
           observer.next(this.booleanResponse(response))
         }
@@ -54,7 +54,7 @@ export class ConnectorService {
 
   loginUser(userDataDto:UserDataDto):Observable<boolean> {
     return new Observable(observer => {
-      this.http.post<boolean>(this.loginUrl, userDataDto, {observe:'response'}).pipe(catchError(this.handleError("login"))).subscribe(
+      this.http.post<boolean>(this.loginUrl, userDataDto, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("login"))).subscribe(
         response => {
           observer.next(this.booleanResponse(response));
         }

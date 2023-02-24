@@ -10,12 +10,11 @@ import { ConnectorService } from '../connector.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private chatDialog:ChatDialogComponent,
-    private chatUsers:ChatUsersComponent,
+  constructor(
     private connector:ConnectorService) { }
 
   ngOnInit(): void {
-    this.chatUsers.getUsersState();
+    //this.chatUsers.getUsersState();
     this.runUpdating();
   }
 
@@ -34,7 +33,7 @@ export class ChatComponent implements OnInit {
   }
 
   private update(){
-    this.chatUsers.getUsersState();
-    this.chatDialog.getNewMessages();
+    //this.chatUsers.getUsersState();
+    //this.chatDialog.getNewMessages();
   }
 }

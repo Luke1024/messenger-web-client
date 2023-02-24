@@ -9,6 +9,8 @@
         <label for="password">password</label>
         <input type="text" class="form-control" id="password" [(ngModel)]="userDataDto.password">
     </div>
-    <button *ngIf="loginView" id="button" (click)="loginUser">Login</button>
-    <button *ngIf="registerView" id="button" (click)="registerUser">Register</button>
+    <button *ngIf="loginView" id="button" (click)="loginUser()">Login</button>
+    <button *ngIf="registerView" id="button" (click)="registerUser()">Register</button>
+    <button *ngIf="loginView" id="button" (click)="switchToRegister()">Switch to register form</button>
+    <button *ngIf="registerView" id="button" (click)="switchToLogin()">Switch to login form></button>
 </div>

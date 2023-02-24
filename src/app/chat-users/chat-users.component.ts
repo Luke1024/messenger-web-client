@@ -16,14 +16,14 @@ export class ChatUsersComponent implements OnInit {
   userName:string = "";
   usersFound:UserDto[] = [];
 
-  constructor(private connector:ConnectorService, private dialog:ChatDialogComponent) { }
+  constructor(private connector:ConnectorService) { }
 
   ngOnInit(): void {
 
   }
 
   getConversation(conversationId:number){
-    this.dialog.getConversation(conversationId);
+    //this.dialog.getConversation(conversationId);
   }
 
   getUsersState(){
