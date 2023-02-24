@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { ConnectorService } from '../connector.service';
+import { MessagingService } from '../messaging.service';
 import { BatchDto } from '../model/batch-dto';
 import { MessageDto } from '../model/message-dto';
 import { SendMessageDto } from '../model/send-message-dto';
+
+@Injectable({
+  providedIn: 'root',
+})
 
 @Component({
   selector: 'app-chat-dialog',
@@ -11,16 +16,29 @@ import { SendMessageDto } from '../model/send-message-dto';
 })
 export class ChatDialogComponent implements OnInit {
 
-  constructor(private connector:ConnectorService) { }
+  constructor(private connector:ConnectorService, private messagingService:MessagingService) { }
 
   messageBatches:BatchDto[] = []
   private currentConversationId = -1;
   message:string = "";
 
   ngOnInit(): void {
+    this.messagingService.getNewMessagesPulse.subscribe(
+      response => {
+        if(response){
+          this.getNewMessages();
+        }
+      }
+    )
+    this.messagingService.getNewConversationPulse.subscribe(
+      conversationId => {
+        this.currentConversationId = conversationId as number;
+        this.getNewMessages();
+      }
+    )
   }
 
-  getNewMessages(){
+  private getNewMessages(){
     if(this.currentConversationId != -1){
       this.connector.getNewMessages(this.currentConversationId).subscribe(newMessages => {
         this.distributeMessages(newMessages);
@@ -40,7 +58,7 @@ export class ChatDialogComponent implements OnInit {
     }
   }
 
-  getConversation(conversationId:number){
+  private getConversation(conversationId:number){
     this.currentConversationId = conversationId;
     this.connector.getLastMessageBatch(conversationId).subscribe(response => {
       if(response != null){

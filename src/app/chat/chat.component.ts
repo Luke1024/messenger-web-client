@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 import { ChatUsersComponent } from '../chat-users/chat-users.component';
 import { ConnectorService } from '../connector.service';
+import { MessagingService } from '../messaging.service';
 
 @Component({
   selector: 'app-chat',
@@ -11,10 +12,10 @@ import { ConnectorService } from '../connector.service';
 export class ChatComponent implements OnInit {
 
   constructor(
-    private connector:ConnectorService) { }
+    private connector:ConnectorService,
+    private messaging:MessagingService) { }
 
   ngOnInit(): void {
-    //this.chatUsers.getUsersState();
     this.runUpdating();
   }
 
@@ -33,7 +34,7 @@ export class ChatComponent implements OnInit {
   }
 
   private update(){
-    //this.chatUsers.getUsersState();
-    //this.chatDialog.getNewMessages();
+    this.messaging.getUsersState();
+    this.messaging.getNewMessages();
   }
 }
