@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
+import { MockedDataService } from '../mocked-data.service';
 import { ConversationStatusDto } from '../model/conversation-status-dto';
 import { UserDto } from '../model/user-dto';
 
@@ -21,9 +21,15 @@ export class ChatUsersComponent implements OnInit {
   userName:string = "";
   usersFound:UserDto[] = [];
 
-  constructor(private connector:ConnectorService,private messaging:MessagingService) { }
+  constructor(private connector:ConnectorService,
+    private messaging:MessagingService,
+    private mockedData:MockedDataService) { }
 
   ngOnInit(): void {
+    this.conversationStatusDto = this.mockedData.getConversationStatusDto();
+    this.usersToAddToConversation = this.mockedData.getUsersToAddToConversation();
+    this.usersFound = this.mockedData.getUsersFound();
+/*
     this.getUsersState();
     this.messaging.getUsersStatePulse.subscribe(
       response => {
@@ -31,11 +37,12 @@ export class ChatUsersComponent implements OnInit {
           this.getUsersState();
         }
       }
-    )
+    ) */
   }
 
   getConversation(conversationId:number){
-    this.messaging.getConverstion(conversationId);
+    console.log(conversationId);
+    //this.messaging.getConverstion(conversationId);
   }
 
   private getUsersState(){
@@ -45,17 +52,19 @@ export class ChatUsersComponent implements OnInit {
   }
 
   addConversation(){
-    this.connector.addConversation(this.usersToAddToConversation).subscribe(response => {
+    console.log("Adding conversation with users " + this.usersToAddToConversation.toString);
+/*    this.connector.addConversation(this.usersToAddToConversation).subscribe(response => {
       if(response){
         this.getUsersState();
         this.usersToAddToConversation = [];
       }
-    })
+    }) */
   }
 
   findUsers(){
-    this.connector.findUser(this.userName).subscribe(response => {
+    console.log("Finding users with string: " + this.userName);
+/*    this.connector.findUser(this.userName).subscribe(response => {
       this.usersFound = response;      
-    })
+    }*/
   }
 }
