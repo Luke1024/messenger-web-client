@@ -4,6 +4,7 @@ import { MessagingService } from '../messaging.service';
 import { MockedDataService } from '../mocked-data.service';
 import { ConversationStatusDto } from '../model/conversation-status-dto';
 import { UserDto } from '../model/user-dto';
+import { ConversationStatus } from './status';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ import { UserDto } from '../model/user-dto';
 })
 export class ChatUsersComponent implements OnInit {
 
-  conversationStatusDto:ConversationStatusDto[] = [];
+  conversationStatus:ConversationStatus[] = [];
   usersToAddToConversation:UserDto[] = [];
   userName:string = "";
   usersFound:UserDto[] = [];
@@ -26,7 +27,8 @@ export class ChatUsersComponent implements OnInit {
     private mockedData:MockedDataService) { }
 
   ngOnInit(): void {
-    this.conversationStatusDto = this.mockedData.getConversationStatusDto();
+    this.conversationStatus = this.mapToConversationStatus(
+      this.mockedData.getConversationStatusDto());
     this.usersToAddToConversation = this.mockedData.getUsersToAddToConversation();
     this.usersFound = this.mockedData.getUsersFound();
 /*
@@ -40,6 +42,15 @@ export class ChatUsersComponent implements OnInit {
     ) */
   }
 
+  private mapToConversationStatus(conversationDtos:ConversationStatusDto[]):ConversationStatus[] {
+    let statuses:ConversationStatus[] = [];
+    for(let i=0; i<conversationDtos.length; i++){
+      statuses.push({users:conversationDtos[i].users.map(user => user.userName).join(", ")
+        ,waitingMessages:conversationDtos[i].waitingMessages} as ConversationStatus)
+    }
+    return statuses;
+  }
+
   getConversation(conversationId:number){
     console.log(conversationId);
     //this.messaging.getConverstion(conversationId);
@@ -47,7 +58,7 @@ export class ChatUsersComponent implements OnInit {
 
   private getUsersState(){
     this.connector.getConversationStatus().subscribe(response => {
-      this.conversationStatusDto = response;
+      this.conversationStatus = this.mapToConversationStatus(response);
     })
   }
 

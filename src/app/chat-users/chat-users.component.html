@@ -1,5 +1,8 @@
 <div>
-    <div *ngFor="let status of conversationStatusDto">
-        
+    <div *ngFor="let status of conversationStatus">
+        <div id="conversation">
+            <p>{{status.users}}</p>
+            <p>{{status.waitingMessages}}<p>
+        </div>
     </div>
 </div>

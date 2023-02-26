@@ -9,6 +9,7 @@ import { ChatDialogComponent } from './chat-dialog/chat-dialog.component';
 import { ChatUsersComponent } from './chat-users/chat-users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ChatInputComponent } from './chat-input/chat-input.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     LoginRegisterComponent,
     ChatComponent,
     ChatDialogComponent,
-    ChatUsersComponent
+    ChatUsersComponent,
+    ChatInputComponent
   ],
   imports: [
     BrowserModule,

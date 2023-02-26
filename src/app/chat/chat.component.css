@@ -1,0 +1,25 @@
+#container {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:brown;
+    overflow-x: hidden;
+}
+
+#dialog {
+    background-color: black;
+    position: absolute;
+    margin-left: 300px;
+}
+
+#input {
+    background-color: rgb(56, 0, 0);
+    height: 100px;
+    bottom: 0;
+    left: 300px;
+    width: 100%;
+    position:fixed;
+    z-index: 1;
+}

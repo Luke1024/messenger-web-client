@@ -12,11 +12,13 @@ export class MockedDataService {
   constructor() { }
 
   getConversationStatusDto():ConversationStatusDto[] {
-    return [
-      {conversationId:1,
-         users:[],
-        waitingMessages:5} as ConversationStatusDto,
-    ]
+    let statusDto:ConversationStatusDto[] = [];
+    for(let i=0; i<20; i++){
+      statusDto.push({conversationId:1,
+        users:this.getUsersToAddToConversation(),
+       waitingMessages:5} as ConversationStatusDto,)
+    }
+    return statusDto;
   }
 
   getUsersToAddToConversation():UserDto[] {
@@ -31,14 +33,7 @@ export class MockedDataService {
   }
 
   getUsersFound():UserDto[] {
-    return [
-      {userId:1,
-        userName:"Tom"} as UserDto,
-        {userId:2,
-          userName:"Bob"} as UserDto,
-        {userId:1,
-          userName:"Rob"} as UserDto
-    ]
+    return this.getUsersToAddToConversation();
   }
 
   getCurrentConversationId():number {
@@ -66,7 +61,7 @@ export class MockedDataService {
       let message:MessageDto = {
         conversationId: this.getCurrentConversationId(),
         batchId: batchId,
-        send: Date.now(),
+        send: new Date().toLocaleString(),
         content: this.getMessageContent(i),
       } as unknown as MessageDto
       messages.push(message);

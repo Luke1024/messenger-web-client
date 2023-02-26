@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
-import { ChatUsersComponent } from '../chat-users/chat-users.component';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
 

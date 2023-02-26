@@ -1,6 +1,6 @@
 export interface MessageDto {
     conversationId:number;
     batchId:number;
-    send:Date;
+    send:string;
     content:string;
 }

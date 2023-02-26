@@ -1,5 +1,5 @@
 <div>
-    <div>
+    <div id="dialogarea">
         <div id="batch" *ngFor="let messageBatch of messageBatches">
             <div id="message" *ngFor="let message of messageBatch.messageDtoList">
                 <p>{{message.send}}</p>
@@ -7,10 +7,5 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="form-group">
-            <input type="textarea" class="form-control" id="input" [(ngModel)]="message">
-        </div>
-        <button id="button" (click)="sendMessage()"></button>
-    </div>
+ 
 </div>
