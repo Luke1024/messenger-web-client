@@ -1,8 +1,33 @@
 <div>
-    <div *ngFor="let status of conversationStatus">
-        <div id="conversation">
-            <p>{{status.users}}</p>
-            <p>{{status.waitingMessages}}<p>
+    <ul ngbNav [(activeId)]="activepanel" class="nav-tabs">
+        <li [ngbNavItem]="'users'">
+          <a ngbNavLink>Users</a>
+        </li>
+        <li [ngbNavItem]="'conversation'">
+          <a ngbNavLink>Conversations</a>
+        </li>
+        <li [ngbNavItem]="'add'">
+            <a ngbNavLink>Add</a>
+        </li>
+      </ul>
+    <div *ngIf="activepanel=='users'">
+        <div *ngFor="let status of singleUserConversations">
+            <div id="conversation">
+                <p>{{status.users}}</p>
+                <p>{{status.waitingMessages}}</p>
+            </div>
         </div>
+    </div>
+    <div *ngIf="activepanel=='conversation'">
+        <div *ngFor="let status of conversationStatus">
+            <div id="conversation">
+                <p>{{status.users}}</p>
+                <p>{{status.waitingMessages}}<p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="activepanel=='add'">
+        <button type="button" class="btn btn-primary" (click)="addUserModal==true">Add user</button>
+        <button type="button" class="btn btn-primary" (click)="addConversationModal==true">Add conversation</button>
     </div>
 </div>

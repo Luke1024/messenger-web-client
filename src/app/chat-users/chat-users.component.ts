@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
 import { MockedDataService } from '../mocked-data.service';
@@ -18,9 +18,13 @@ import { ConversationStatus } from './status';
 export class ChatUsersComponent implements OnInit {
 
   conversationStatus:ConversationStatus[] = [];
+  singleUserConversations:ConversationStatusDto[] = [];
   usersToAddToConversation:UserDto[] = [];
   userName:string = "";
   usersFound:UserDto[] = [];
+  activepanel:string = "users";
+  addUserModal:boolean = false;
+  addConversationModal:boolean = false;
 
   constructor(private connector:ConnectorService,
     private messaging:MessagingService,
