@@ -27,15 +27,9 @@ export class ChatUsersComponent implements OnInit {
   addConversationModal:boolean = false;
 
   constructor(private connector:ConnectorService,
-    private messaging:MessagingService,
-    private mockedData:MockedDataService) { }
+    private messaging:MessagingService) { }
 
   ngOnInit(): void {
-    this.conversationStatus = this.mapToConversationStatus(
-      this.mockedData.getConversationStatusDto());
-    this.usersToAddToConversation = this.mockedData.getUsersToAddToConversation();
-    this.usersFound = this.mockedData.getUsersFound();
-/*
     this.getUsersState();
     this.messaging.getUsersStatePulse.subscribe(
       response => {
@@ -43,7 +37,7 @@ export class ChatUsersComponent implements OnInit {
           this.getUsersState();
         }
       }
-    ) */
+    ) 
   }
 
   private mapToConversationStatus(conversationDtos:ConversationStatusDto[]):ConversationStatus[] {
@@ -56,8 +50,7 @@ export class ChatUsersComponent implements OnInit {
   }
 
   getConversation(conversationId:number){
-    console.log(conversationId);
-    //this.messaging.getConverstion(conversationId);
+    this.messaging.getConverstion(conversationId);
   }
 
   private getUsersState(){
@@ -68,18 +61,18 @@ export class ChatUsersComponent implements OnInit {
 
   addConversation(){
     console.log("Adding conversation with users " + this.usersToAddToConversation.toString);
-/*    this.connector.addConversation(this.usersToAddToConversation).subscribe(response => {
+    this.connector.addConversation(this.usersToAddToConversation).subscribe(response => {
       if(response){
         this.getUsersState();
         this.usersToAddToConversation = [];
       }
-    }) */
+    }) 
   }
 
   findUsers(){
     console.log("Finding users with string: " + this.userName);
-/*    this.connector.findUser(this.userName).subscribe(response => {
+    this.connector.findUser(this.userName).subscribe(response => {
       this.usersFound = response;      
-    }*/
+    })
   }
 }

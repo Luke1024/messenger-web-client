@@ -18,17 +18,13 @@ import { SendMessageDto } from '../model/send-message-dto';
 export class ChatDialogComponent implements OnInit {
 
   constructor(private connector:ConnectorService,
-     private messagingService:MessagingService,
-     private mockedData:MockedDataService) { }
+     private messagingService:MessagingService) { }
 
   messageBatches:BatchDto[] = []
   private currentConversationId = -1;
   message:string = "";
 
   ngOnInit(): void {
-    this.currentConversationId = this.mockedData.getCurrentConversationId();
-    this.messageBatches = this.mockedData.getMessageBatches();
-    /*
     this.messagingService.getNewMessagesPulse.subscribe(
       response => {
         if(response){
@@ -42,7 +38,6 @@ export class ChatDialogComponent implements OnInit {
         this.getNewMessages();
       }
     )
-    */
   }
 
   private getNewMessages(){
@@ -88,14 +83,12 @@ export class ChatDialogComponent implements OnInit {
 
   loadEarlierBatchWhenScrolling(earlierBatchCount:number){
     console.log(earlierBatchCount);
-    /*
     if(this.messageBatches.length > 0){
       let requiredBatchId = this.messageBatches[this.messageBatches.length-1].id - 1;
       if(requiredBatchId > -1){
         this.downloadAdditionalBatch(requiredBatchId)
       }
     }
-    */
   }
 
   private downloadAdditionalBatch(requiredBatchId:number){

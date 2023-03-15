@@ -64,7 +64,7 @@ export class ConnectorService {
 
   findUser(userName:string):Observable<UserDto[]> {
     return new Observable(observer => {
-      this.http.post<UserDto[]>(this.loginUrl, userName, {observe:'response'}).pipe(catchError(this.handleError("find users"))).subscribe(
+      this.http.post<UserDto[]>(this.findUserUrl, userName, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("find users"))).subscribe(
         response => { 
           observer.next(this.processFindUserResponse(response))
         }
@@ -86,7 +86,7 @@ export class ConnectorService {
   //message
   isStatusNew():Observable<boolean> {
     return new Observable(observer => {
-       this.http.get<boolean>(this.isStatusNewUrl, {observe:'response'}).pipe(catchError(this.handleError("detect change"))).subscribe(
+       this.http.get<boolean>(this.isStatusNewUrl, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("detect change"))).subscribe(
         response => {
           observer.next(this.booleanResponse(response));
         }
@@ -96,7 +96,7 @@ export class ConnectorService {
 
   getConversationStatus():Observable<ConversationStatusDto[]> {
     return new Observable(observer => {
-      this.http.get<ConversationStatusDto[]>(this.getConversationStatusUrl, {observe:'response'})
+      this.http.get<ConversationStatusDto[]>(this.getConversationStatusUrl, {observe:'response', withCredentials:true})
       .pipe(catchError(this.handleError("get conversation status"))).subscribe(
         response => {
           observer.next(this.getConversationStatusResponse(response));
@@ -118,7 +118,7 @@ export class ConnectorService {
 
   getNewMessages(conversationId:number):Observable<MessageDto[]> {
     return new Observable(observer => {
-      this.http.get<MessageDto[]>(this.getNewMessagesUrl + "/" + conversationId, {observe:'response'})
+      this.http.get<MessageDto[]>(this.getNewMessagesUrl + "/" + conversationId, {observe:'response',withCredentials:true})
       .pipe(catchError(this.handleError("get new messages"))).subscribe(
         response => {
           observer.next(this.getNewMessagesResponse(response));
@@ -140,7 +140,7 @@ export class ConnectorService {
 
   getLastMessageBatch(conversationId:number):Observable<BatchDto> {
     return new Observable(observer => {
-      this.http.get<BatchDto>(this.getLastMessageBatchUrl + "/" + conversationId, {observe:'response'})
+      this.http.get<BatchDto>(this.getLastMessageBatchUrl + "/" + conversationId, {observe:'response',withCredentials:true})
       .pipe(catchError(this.handleError("get last message batch"))).subscribe(
         response => {
           observer.next(this.getMessageBatchResponse(response))
@@ -151,7 +151,7 @@ export class ConnectorService {
 
   getMessageBatch(conversationId:number, batchId:number):Observable<BatchDto> {
     return new Observable(observer => {
-      this.http.get<BatchDto>(this.getMessageBatchUrl + "/" + conversationId, {observe:'response'})
+      this.http.get<BatchDto>(this.getMessageBatchUrl + "/" + conversationId, {observe:'response',withCredentials:true})
       .pipe(catchError(this.handleError("get message batch"))).subscribe(
         response => {
           observer.next(this.getMessageBatchResponse(response))
@@ -160,7 +160,7 @@ export class ConnectorService {
     })
   }
 
-  getMessageBatchResponse(response:any):BatchDto {
+  private getMessageBatchResponse(response:any):BatchDto {
     if(response != null){
       if(response.status==200){
         if(this.typeCheck(response.body)=='batchdto'){
@@ -173,7 +173,7 @@ export class ConnectorService {
   
   sendMessage(sendMessageDto:SendMessageDto):Observable<boolean> {
     return new Observable(observer => {
-       this.http.post<boolean>(this.sendMessageUrl, sendMessageDto, {observe:'response'})
+       this.http.post<boolean>(this.sendMessageUrl, sendMessageDto, {observe:'response',withCredentials:true})
        .pipe(catchError(this.handleError("send message"))).subscribe(
         response => {
           observer.next(this.booleanResponse(response))
@@ -184,7 +184,7 @@ export class ConnectorService {
 
   addConversation(userDtoList:UserDto[]):Observable<boolean> {
     return new Observable(observer => {
-      this.http.post<boolean>(this.addConversationUrl, userDtoList, {observe:'response'})
+      this.http.post<boolean>(this.addConversationUrl, userDtoList, {observe:'response',withCredentials:true})
       .pipe(catchError(this.handleError("add conversation"))).subscribe(
         response => {
           observer.next(this.booleanResponse(response))
@@ -193,7 +193,7 @@ export class ConnectorService {
     })
   }
 
-  typeCheck(value:any):string {
+  private typeCheck(value:any):string {
     const return_value = Object.prototype.toString.call(value);
     // we can also use regex to do this...
     const type = return_value.substring(
@@ -203,7 +203,7 @@ export class ConnectorService {
     return type.toLowerCase();
   }
 
-  booleanResponse(response:any):boolean {
+  private booleanResponse(response:any):boolean {
     if(response != null){
       if(response.status==200){
         if(typeof response.body === 'boolean'){

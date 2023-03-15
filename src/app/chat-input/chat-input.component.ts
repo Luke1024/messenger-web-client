@@ -27,7 +27,7 @@ export class ChatInputComponent implements OnInit {
   sendMessage(){
     console.log(this.message);
     this.message = "";
-    /*
+    
     if(this.currentConversationId != -1){
       this.connector.sendMessage({conversationId:this.currentConversationId, content:this.message} as SendMessageDto).subscribe(response => {
         if(response){
@@ -37,6 +37,5 @@ export class ChatInputComponent implements OnInit {
         }
       })
     }
-    */
   }
 }
