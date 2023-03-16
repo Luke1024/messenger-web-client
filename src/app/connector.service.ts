@@ -108,7 +108,8 @@ export class ConnectorService {
   private getConversationStatusResponse(response:any):ConversationStatusDto[] {
     if(response != null){
       if(response.status==200){
-        if(this.typeCheck(response.body)=='conversationstatusdto'){
+        console.log("typecheck : " + this.typeCheck(response.body))
+        if(this.typeCheck(response.body)=='array'){
           return response.body;
         }
       }
@@ -130,7 +131,7 @@ export class ConnectorService {
   private getNewMessagesResponse(response:any):MessageDto[] {
     if(response != null){
       if(response.status==200){
-        if(this.typeCheck(response.body)=='messagedto'){
+        if(this.typeCheck(response.body)=='array'){
           return response.body;
         }
       }

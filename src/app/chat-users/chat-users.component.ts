@@ -17,8 +17,9 @@ import { ConversationStatus } from './status';
 })
 export class ChatUsersComponent implements OnInit {
 
-  conversationStatus:ConversationStatus[] = [];
-  singleUserConversations:ConversationStatusDto[] = [];
+  multiUserConversations:ConversationStatus[] = [];
+  singleUserConversations:ConversationStatus[] = [];
+
   usersToAddToConversation:UserDto[] = [];
   userName:string = "";
   usersFound:UserDto[] = [];
@@ -31,6 +32,7 @@ export class ChatUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsersState();
+    console.log("This operation run")
     this.messaging.getUsersStatePulse.subscribe(
       response => {
         if(response){
@@ -40,23 +42,28 @@ export class ChatUsersComponent implements OnInit {
     ) 
   }
 
-  private mapToConversationStatus(conversationDtos:ConversationStatusDto[]):ConversationStatus[] {
-    let statuses:ConversationStatus[] = [];
-    for(let i=0; i<conversationDtos.length; i++){
-      statuses.push({users:conversationDtos[i].users.map(user => user.userName).join(", ")
-        ,waitingMessages:conversationDtos[i].waitingMessages} as ConversationStatus)
-    }
-    return statuses;
-  }
-
   getConversation(conversationId:number){
     this.messaging.getConverstion(conversationId);
   }
 
   private getUsersState(){
     this.connector.getConversationStatus().subscribe(response => {
-      this.conversationStatus = this.mapToConversationStatus(response);
+      this.mapToConversationStatus(response);
     })
+  }
+
+  private mapToConversationStatus(conversationDtos:ConversationStatusDto[]) {
+    for(let i=0; i<conversationDtos.length; i++){
+      let status:ConversationStatus = {
+        users:conversationDtos[i].users.map(user => user.userName).join(", "),
+        waitingMessages:conversationDtos[i].waitingMessages
+      };
+      if(conversationDtos[i].direct==true){
+        this.singleUserConversations.push(status);
+      } else {
+        this.multiUserConversations.push(status);
+      }
+    }
   }
 
   addConversation(){

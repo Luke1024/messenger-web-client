@@ -19,7 +19,7 @@
         </div>
     </div>
     <div *ngIf="activepanel=='conversation'">
-        <div *ngFor="let status of conversationStatus">
+        <div *ngFor="let status of multiUserConversations">
             <div id="conversation">
                 <p>{{status.users}}</p>
                 <p>{{status.waitingMessages}}<p>
