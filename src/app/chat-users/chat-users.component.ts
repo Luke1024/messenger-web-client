@@ -1,10 +1,8 @@
 import { Component, Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
-import { MockedDataService } from '../mocked-data.service';
 import { ConversationStatusDto } from '../model/conversation-status-dto';
 import { UserDto } from '../model/user-dto';
-import { ConversationStatus } from './status';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +15,8 @@ import { ConversationStatus } from './status';
 })
 export class ChatUsersComponent implements OnInit {
 
-  multiUserConversations:ConversationStatus[] = [];
-  singleUserConversations:ConversationStatus[] = [];
+  multiUserConversations:ConversationStatusDto[] = [];
+  singleUserConversations:ConversationStatusDto[] = [];
 
   usersToAddToConversation:UserDto[] = [];
   userName:string = "";
@@ -55,15 +53,10 @@ export class ChatUsersComponent implements OnInit {
 
   private mapToConversationStatus(conversationDtos:ConversationStatusDto[]) {
     for(let i=0; i<conversationDtos.length; i++){
-      let status:ConversationStatus = {
-        id:conversationDtos[i].conversationId,
-        users:conversationDtos[i].users.map(user => user.userName).join(", "),
-        waitingMessages:conversationDtos[i].waitingMessages
-      };
       if(conversationDtos[i].direct==true){
-        this.singleUserConversations.push(status);
+        this.singleUserConversations.push(conversationDtos[i]);
       } else {
-        this.multiUserConversations.push(status);
+        this.multiUserConversations.push(conversationDtos[i]);
       }
     }
   }

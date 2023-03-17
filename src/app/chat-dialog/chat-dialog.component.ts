@@ -1,7 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
-import { MockedDataService } from '../mocked-data.service';
 import { BatchDto } from '../model/batch-dto';
 import { MessageDto } from '../model/message-dto';
 import { SendMessageDto } from '../model/send-message-dto';
