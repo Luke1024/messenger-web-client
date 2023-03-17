@@ -35,7 +35,7 @@ export class ChatDialogComponent implements OnInit {
     this.messagingService.getNewConversationPulse.subscribe(
       conversationId => {
         this.currentConversationId = conversationId as number;
-        this.getNewMessages();
+        this.getConversation(this.currentConversationId);
       }
     )
   }

@@ -25,7 +25,7 @@ export class MessagingService {
     this.getNewMessagesMessage.next(true);
   }
 
-  getConverstion(conversationId:number) {
+  getConversation(conversationId:number) {
     this.getNewConversationPulse.next(conversationId);
   }
 }

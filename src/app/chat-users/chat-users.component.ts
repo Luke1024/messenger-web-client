@@ -43,7 +43,8 @@ export class ChatUsersComponent implements OnInit {
   }
 
   getConversation(conversationId:number){
-    this.messaging.getConverstion(conversationId);
+    console.log("Get conversation: " + conversationId);
+    this.messaging.getConversation(conversationId);
   }
 
   private getUsersState(){
@@ -55,6 +56,7 @@ export class ChatUsersComponent implements OnInit {
   private mapToConversationStatus(conversationDtos:ConversationStatusDto[]) {
     for(let i=0; i<conversationDtos.length; i++){
       let status:ConversationStatus = {
+        id:conversationDtos[i].conversationId,
         users:conversationDtos[i].users.map(user => user.userName).join(", "),
         waitingMessages:conversationDtos[i].waitingMessages
       };

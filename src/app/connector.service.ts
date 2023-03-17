@@ -24,8 +24,8 @@ export class ConnectorService {
   private isStatusNewUrl = this.rootUrl + "message/change";
   private getConversationStatusUrl = this.rootUrl + "message/status";
   private getNewMessagesUrl = this.rootUrl + "message/new/";
-  private getLastMessageBatchUrl = this.rootUrl + "message/loadLast/";
-  private getMessageBatchUrl = this.rootUrl + "message/load/";
+  private getLastMessageBatchUrl = this.rootUrl + "message/loadLast";
+  private getMessageBatchUrl = this.rootUrl + "message/load";
   private sendMessageUrl = this.rootUrl + "message/send";
   private addConversationUrl = this.rootUrl + "message/addConversation";
 
@@ -164,9 +164,7 @@ export class ConnectorService {
   private getMessageBatchResponse(response:any):BatchDto {
     if(response != null){
       if(response.status==200){
-        if(this.typeCheck(response.body)=='batchdto'){
-          return response.body;
-        }
+        return response.body;
       }
     }
     return {} as BatchDto;

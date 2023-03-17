@@ -12,7 +12,7 @@
       </ul>
     <div *ngIf="activepanel=='users'">
         <div *ngFor="let status of singleUserConversations">
-            <div id="conversation">
+            <div id="conversation" (click)="getConversation(status.id)">
                 <p>{{status.users}}</p>
                 <p>{{status.waitingMessages}}</p>
             </div>
@@ -20,7 +20,7 @@
     </div>
     <div *ngIf="activepanel=='conversation'">
         <div *ngFor="let status of multiUserConversations">
-            <div id="conversation">
+            <div id="conversation"(click)="getConversation(status.id)">
                 <p>{{status.users}}</p>
                 <p>{{status.waitingMessages}}<p>
             </div>
