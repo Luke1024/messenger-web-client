@@ -52,6 +52,8 @@ export class ChatUsersComponent implements OnInit {
   }
 
   private mapToConversationStatus(conversationDtos:ConversationStatusDto[]) {
+    this.singleUserConversations = [];
+    this.multiUserConversations = [];
     for(let i=0; i<conversationDtos.length; i++){
       if(conversationDtos[i].direct==true){
         this.singleUserConversations.push(conversationDtos[i]);
