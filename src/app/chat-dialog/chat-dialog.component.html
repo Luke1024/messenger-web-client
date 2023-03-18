@@ -1,11 +1,10 @@
 <div>
     <div id="dialogarea">
         <div id="batch" *ngFor="let messageBatch of messageBatches">
-            <div id="message" *ngFor="let message of messageBatch.messageDtoList">
-                <p>{{message.send}}</p>
+            <div class="message" *ngFor="let message of messageBatch.messageDtoList" [class.byuser]="message.byUserReceiving">
+                <p>{{message.send}}</p>  
                 <p>{{message.content}}</p>
             </div>
         </div>
     </div>
- 
 </div>

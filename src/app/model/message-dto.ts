@@ -3,4 +3,5 @@ export interface MessageDto {
     batchId:number;
     send:string;
     content:string;
+    byUserReceiving:boolean;
 }
