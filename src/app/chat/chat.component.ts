@@ -9,12 +9,17 @@ import { MessagingService } from '../messaging.service';
 })
 export class ChatComponent implements OnInit {
 
+  addUser:boolean = true;
+  addConversation:boolean = true;
+
   constructor(
     private connector:ConnectorService,
     private messaging:MessagingService) { }
 
   ngOnInit(): void {
     this.runUpdating();
+    this.messaging.conversationAddingModalStatus.subscribe(signal => this.addConversation = signal as boolean);
+    this.messaging.userAddingModalStatus.subscribe(signal => this.addUser = signal as boolean);
   }
 
   private runUpdating(){

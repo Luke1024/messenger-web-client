@@ -23,7 +23,7 @@ export class ConnectorService {
 
   private isStatusNewUrl = this.rootUrl + "message/change";
   private getConversationStatusUrl = this.rootUrl + "message/status";
-  private getNewMessagesUrl = this.rootUrl + "message/new/";
+  private getNewMessagesUrl = this.rootUrl + "message/new";
   private getLastMessageBatchUrl = this.rootUrl + "message/loadLast";
   private getMessageBatchUrl = this.rootUrl + "message/load";
   private sendMessageUrl = this.rootUrl + "message/send";

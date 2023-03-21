@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ChatInputComponent } from './chat-input/chat-input.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddConversationModalComponent } from './add-conversation-modal/add-conversation-modal.component';
+import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ChatComponent,
     ChatDialogComponent,
     ChatUsersComponent,
-    ChatInputComponent
+    ChatInputComponent,
+    AddConversationModalComponent,
+    AddUserModalComponent
   ],
   imports: [
     BrowserModule,

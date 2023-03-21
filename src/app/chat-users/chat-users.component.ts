@@ -17,13 +17,7 @@ export class ChatUsersComponent implements OnInit {
 
   multiUserConversations:ConversationStatusDto[] = [];
   singleUserConversations:ConversationStatusDto[] = [];
-
-  usersToAddToConversation:UserDto[] = [];
-  userName:string = "";
-  usersFound:UserDto[] = [];
   activepanel:string = "users";
-  addUserModal:boolean = false;
-  addConversationModal:boolean = false;
 
   constructor(private connector:ConnectorService,
     private messaging:MessagingService) { }
@@ -63,20 +57,11 @@ export class ChatUsersComponent implements OnInit {
     }
   }
 
-  addConversation(){
-    console.log("Adding conversation with users " + this.usersToAddToConversation.toString);
-    this.connector.addConversation(this.usersToAddToConversation).subscribe(response => {
-      if(response){
-        this.getUsersState();
-        this.usersToAddToConversation = [];
-      }
-    }) 
+  openUserAddingModal(){
+    this.messaging.userModalStatus(true);
   }
 
-  findUsers(){
-    console.log("Finding users with string: " + this.userName);
-    this.connector.findUser(this.userName).subscribe(response => {
-      this.usersFound = response;      
-    })
+  openConversationModal(){
+    this.messaging.conversationModalStatus(true);
   }
 }

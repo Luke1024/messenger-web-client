@@ -17,6 +17,12 @@ export class MessagingService {
   private getNewConversationMessage = new Subject();
   getNewConversationPulse = new Subject();
 
+  userAddingModalStatus = new Subject();
+  private openUserAdding = this.userAddingModalStatus.asObservable();
+
+  conversationAddingModalStatus = new Subject();
+  private openConversationAdding = this.conversationAddingModalStatus.asObservable();
+
   getUsersState() {
     this.getUsersStateMessage.next(true);
   }
@@ -27,5 +33,13 @@ export class MessagingService {
 
   getConversation(conversationId:number) {
     this.getNewConversationPulse.next(conversationId);
+  }
+
+  userModalStatus(status:boolean){
+    this.userAddingModalStatus.next(status);
+  }
+
+  conversationModalStatus(status:boolean){
+    this.conversationAddingModalStatus.next(status);
   }
 }

@@ -1,6 +1,6 @@
 <div>
     <div id="dialogarea">
-        <div id="batch" *ngFor="let messageBatch of messageBatches">
+        <div id="batch" *ngFor="let messageBatch of messageBatches;">
             <div class="message" *ngFor="let message of messageBatch.messageDtoList" [class.byuser]="message.byUserReceiving">
                 <p>{{message.send}}</p>  
                 <p>{{message.content}}</p>
