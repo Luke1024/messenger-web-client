@@ -1,1 +1,18 @@
-<p>add-user-modal works!</p>
+<div>
+    <div id="modal">
+        <div style="top:20px; right:20px; position:absolute" (click)="closeModal()">X</div>
+        <div>
+            <div class="form-group">
+                <input class="form-control" [(ngModel)]="name">
+            </div>
+            <button class="button" id="submit" (click)="search()">Search</button>
+        </div>
+        <div>
+            <div *ngFor="let user of usersFound">
+                <div>
+                    <div>{{user.userName}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

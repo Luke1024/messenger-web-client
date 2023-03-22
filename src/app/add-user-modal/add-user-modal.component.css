@@ -1,0 +1,9 @@
+#modal {
+    background-color: rgb(130, 28, 28);
+    margin:auto;
+    left: 10%;
+    top:10%;
+    width: 80%;
+    height: 80%;
+    position: fixed;
+}

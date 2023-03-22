@@ -1,0 +1,26 @@
+#modal {
+    background-color: rgb(130, 28, 28);
+    margin:auto;
+    left: 10%;
+    top:10%;
+    width: 80%;
+    height: 80%;
+    position: fixed;
+}
+
+#user, button {
+    background-color: rgb(56, 56, 56);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(199, 199, 199);
+}
+
+#list_available {
+    width: 40%;
+}
+
+#to_conversation {
+    width: 40%;
+    margin-left:40%;
+}

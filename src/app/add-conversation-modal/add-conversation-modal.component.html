@@ -1,0 +1,24 @@
+<div>
+    <div id="modal">
+        <div style="top:20px; right:20px; position:absolute" (click)="closeModal()">X</div>
+        <div>
+            <div id="list_available">
+                <p>Users available:</p>
+                <div *ngFor="let user of availableUsers" id="user" (click)="moveUserToCreateList(user)">
+                    <div>
+                        <div>{{user.userName}}</div>
+                    </div>
+                </div>
+            </div>
+            <div id="to_conversation">
+                <p>Users for conversation creation.</p>
+                <div *ngFor="let user of usersForConversationCreation" id="user" (click)="deleteUserFromCreateListAndMoveToAvailable(user)">
+                    <div>
+                        <div>{{user.userName}}</div>
+                    </div>
+                </div>
+            </div>
+            <button (click)="createConversation()">Add conversation</button>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@
     </div>
     <div *ngIf="activepanel=='conversation'">
         <div *ngFor="let status of multiUserConversations">
-            <div id="conversation"(click)="getConversation(status.conversationId)">
+            <div id="conversation" (click)="getConversation(status.conversationId)">
                 <p>{{status.users}}</p>
                 <p>{{status.waitingMessages}}<p>
             </div>

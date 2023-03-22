@@ -19,7 +19,8 @@ export class ConnectorService {
   private pingUrl = this.rootUrl + "user/ping";
   private registerUserUrl = this.rootUrl + "user/register";
   private loginUrl = this.rootUrl + "user/login";
-  private findUserUrl = this.rootUrl + "user/findUser/";
+  private findUserUrl = this.rootUrl + "user/findUser";
+  private userContactsUrl = this.rootUrl + "user/allUsers";
 
   private isStatusNewUrl = this.rootUrl + "message/change";
   private getConversationStatusUrl = this.rootUrl + "message/status";
@@ -64,8 +65,18 @@ export class ConnectorService {
 
   findUser(userName:string):Observable<UserDto[]> {
     return new Observable(observer => {
-      this.http.post<UserDto[]>(this.findUserUrl, userName, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("find users"))).subscribe(
+      this.http.post<UserDto[]>(this.findUserUrl + "/" + userName, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("find users"))).subscribe(
         response => { 
+          observer.next(this.processFindUserResponse(response))
+        }
+      )
+    })
+  }
+
+  getUserContacts():Observable<UserDto[]> {
+    return new Observable(observer => {
+      this.http.get<UserDto[]>(this.userContactsUrl, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("getting user contacts"))).subscribe(
+        response => {
           observer.next(this.processFindUserResponse(response))
         }
       )
@@ -75,9 +86,7 @@ export class ConnectorService {
   private processFindUserResponse(response:any):UserDto[] {
     if(response != null){
       if(response.status==200){
-        if(this.typeCheck(response.body)=='userdto'){
-          return response.body;
-        }
+        return response.body;
       }
     }
     return [] as UserDto[];
