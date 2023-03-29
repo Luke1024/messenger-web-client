@@ -7,12 +7,17 @@
             </div>
             <button class="button" id="submit" (click)="search()">Search</button>
         </div>
-        <div>
-            <div *ngFor="let user of usersFound">
-                <div>
-                    <div>{{user.userName}}</div>
-                </div>
+        <div id="available">
+            <div *ngFor="let user of usersFound" id="user" (click)="moveToAdd(user)">
+                <div>{{user.userName}}</div>
             </div>
+        </div>
+        <div id="to_add">
+            <div *ngIf="userToAdd">
+                <div id="user" *ngIf="userToAdd">{{userToAdd.userName}}</div>
+                <button class="button" (click)="add()">Add</button>
+            </div>
+            <p>{{message}}</p>
         </div>
     </div>
 </div>

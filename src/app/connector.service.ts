@@ -8,6 +8,7 @@ import { UserDto } from './model/user-dto';
 import { catchError } from 'rxjs/operators';
 import { MessageDto } from './model/message-dto';
 import { BatchDto } from './model/batch-dto';
+import { AddConversationResponse } from './model/add-conversation-response';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class ConnectorService {
 
   findUser(userName:string):Observable<UserDto[]> {
     return new Observable(observer => {
-      this.http.post<UserDto[]>(this.findUserUrl + "/" + userName, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("find users"))).subscribe(
+      this.http.get<UserDto[]>(this.findUserUrl + "/" + userName, {observe:'response',withCredentials:true}).pipe(catchError(this.handleError("find users"))).subscribe(
         response => { 
           observer.next(this.processFindUserResponse(response))
         }
@@ -190,15 +191,24 @@ export class ConnectorService {
     })
   }
 
-  addConversation(userDtoList:UserDto[]):Observable<boolean> {
+  addConversation(userDtoList:UserDto[]):Observable<AddConversationResponse> {
     return new Observable(observer => {
       this.http.post<boolean>(this.addConversationUrl, userDtoList, {observe:'response',withCredentials:true})
       .pipe(catchError(this.handleError("add conversation"))).subscribe(
-        response => {
-          observer.next(this.booleanResponse(response))
+        response => { 
+          observer.next(this.addConversationResponse(response))
         }
       )
     })
+  }
+
+  private addConversationResponse(response:any):AddConversationResponse {
+    if(response != null){
+      if(response.status==200){
+        return response.body;
+      }
+    }
+    return {status:false, message:""}
   }
 
   private typeCheck(value:any):string {

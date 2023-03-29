@@ -63,6 +63,7 @@ export class ChatDialogComponent implements OnInit {
     this.currentConversationId = conversationId;
     this.connector.getLastMessageBatch(conversationId).subscribe(response => {
       if(response != null){
+        this.messageBatches = [];
         this.messageBatches.push(response);
       }
     });

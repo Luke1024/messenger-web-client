@@ -26,7 +26,7 @@
     z-index: 1;
 }
 
-#conversation_modal {
+#conversation_modal, #user_modal {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);

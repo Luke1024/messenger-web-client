@@ -7,3 +7,28 @@
     height: 80%;
     position: fixed;
 }
+
+#user {
+    background-color: rgb(56, 56, 56);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(199, 199, 199);
+}
+
+#available {
+    width: 40%;
+}
+
+#to_add {
+    width: 40%;
+    margin-left:40%;
+}
+
+button {
+    background-color: rgb(56, 56, 56);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(199, 199, 199);
+}

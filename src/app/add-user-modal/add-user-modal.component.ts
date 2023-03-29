@@ -12,6 +12,8 @@ export class AddUserModalComponent implements OnInit {
 
   name:string = "";
   usersFound:UserDto[] = [];
+  userToAdd:UserDto | undefined;
+  message:string = "";
 
   constructor(private messaging:MessagingService,
     private connector:ConnectorService) { }
@@ -24,7 +26,27 @@ export class AddUserModalComponent implements OnInit {
   }
 
   search() {
-    this.connector.findUser(this.name).subscribe(response => this.usersFound = response)
-    this.name = "";
+    if(this.name.length != 0){
+      this.connector.findUser(this.name).subscribe(response => this.usersFound = response)
+      this.name = "";
+      this.message = "";
+    }
+  }
+
+  moveToAdd(user:UserDto){
+    this.userToAdd = user;
+    this.message = "";
+  }
+
+  add(){
+    if(this.userToAdd != undefined){
+      this.connector.addConversation([this.userToAdd]).subscribe(response => {
+        if(response.status){
+          this.closeModal();
+        } else {
+          this.message = response.message;
+        }
+      });
+    }
   }
 }

@@ -13,6 +13,7 @@ export class AddConversationModalComponent implements OnInit {
   availableUsers:UserDto[] = [];
   usersForConversationCreation:UserDto[] = [];
   loaded:boolean = false;
+  message:string = "";
 
   constructor(
     private messaging:MessagingService,
@@ -31,19 +32,21 @@ export class AddConversationModalComponent implements OnInit {
   moveUserToCreateList(user:UserDto){
     this.usersForConversationCreation.push(user);
     this.availableUsers = this.availableUsers.filter(userA => userA != user);
+    this.message = "";
   }
   
   deleteUserFromCreateListAndMoveToAvailable(user:UserDto){
     this.availableUsers.push(user);
-    this.usersForConversationCreation = this.usersForConversationCreation.filter(userA => userA != user)
+    this.usersForConversationCreation = this.usersForConversationCreation.filter(userA => userA != user);
+    this.message = "";
   }
 
   createConversation() {
-    this.connector.addConversation(this.usersForConversationCreation).subscribe(isCreated => {
-      if(isCreated){
+    this.connector.addConversation(this.usersForConversationCreation).subscribe(response => {
+      if(response.status){
         this.closeModal();
       } else {
-
+        this.message = response.message;
       }
     })
   }
