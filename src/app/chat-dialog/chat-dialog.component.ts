@@ -61,10 +61,15 @@ export class ChatDialogComponent implements OnInit {
 
   private getConversation(conversationId:number){
     this.currentConversationId = conversationId;
-    this.connector.getLastMessageBatch(conversationId).subscribe(response => {
-      if(response != null){
-        this.messageBatches = [];
-        this.messageBatches.push(response);
+    this.connector.getLastMessageBatch(conversationId).subscribe(batch => {
+      if(batch != null){
+        if(batch.messageDtoList == null){
+          console.log("interpreted as null")
+          this.messageBatches.push({id:0,messageDtoList:[]} as BatchDto);
+        } else {
+          this.messageBatches = [];
+          this.messageBatches.push(batch);
+        }
       }
     });
   }
