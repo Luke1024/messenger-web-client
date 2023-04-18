@@ -12,17 +12,22 @@ export class AddUserModalComponent implements OnInit {
 
   name:string = "";
   usersFound:UserDto[] = [];
-  userToAdd:UserDto | undefined;
+  userToAdd:UserDto = {} as UserDto;
   message:string = "";
+  modalInModal:boolean = false;
 
   constructor(private messaging:MessagingService,
     private connector:ConnectorService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   closeModal() {
     this.messaging.userAddingModalStatus.next(false);
+  }
+
+  cancel() {
+    this.modalInModal = false;
+    this.userToAdd = {} as UserDto; 
   }
 
   search() {
@@ -34,6 +39,7 @@ export class AddUserModalComponent implements OnInit {
   }
 
   moveToAdd(user:UserDto){
+    this.modalInModal = true;
     this.userToAdd = user;
     this.message = "";
   }

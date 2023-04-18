@@ -1,23 +1,20 @@
-<div>
-    <div id="modal">
+<div id="modal">
+    <div id="window">
         <div style="top:20px; right:20px; position:absolute" (click)="closeModal()">X</div>
-        <div>
-            <div class="form-group">
-                <input class="form-control" [(ngModel)]="name">
-            </div>
-            <button class="button" id="submit" (click)="search()">Search</button>
-        </div>
-        <div id="available">
+        <input id="input"  [(ngModel)]="name">
+        <button class="button" (click)="search()">Search</button>
+        <div id="search_container">
             <div *ngFor="let user of usersFound" id="user" (click)="moveToAdd(user)">
                 <div>{{user.userName}}</div>
             </div>
         </div>
-        <div id="to_add">
-            <div *ngIf="userToAdd">
-                <div id="user" *ngIf="userToAdd">{{userToAdd.userName}}</div>
-                <button class="button" (click)="add()">Add</button>
-            </div>
+    </div>
+    <div id="modal_in_modal" *ngIf="modalInModal">
+        <div id="window_in">
+            <div>{{userToAdd.userName}}</div>
+            <button class="button" id="add" (click)="add()">Add</button>
+            <button class="button" id="cancel" (click)="cancel()">Cancel></button>
             <p>{{message}}</p>
-        </div>
+        </div>    
     </div>
 </div>
