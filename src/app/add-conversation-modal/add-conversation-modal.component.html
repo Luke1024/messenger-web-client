@@ -1,25 +1,24 @@
-<div>
-    <div id="modal">
-        <div style="top:20px; right:20px; position:absolute" (click)="closeModal()">X</div>
-        <div>
-            <div id="list_available">
-                <p>Users available:</p>
-                <div *ngFor="let user of availableUsers" id="user" (click)="moveUserToCreateList(user)">
-                    <div>
-                        <div>{{user.userName}}</div>
-                    </div>
-                </div>
+<div id="modal">
+    <div id="window">
+        <div style="top:15px; right:15px; position:absolute" (click)="closeModal()">X</div>
+        <p style="position:absolute; left:30px; top:10px; font-size: large;">Users available:</p>
+        <div id="available_container">            
+            <div *ngFor="let user of availableUsers" id="user" (click)="moveUserToCreateList(user)">
+                <div>{{user.userName}}</div>
             </div>
-            <div id="to_conversation">
-                <p>Users for conversation creation.</p>
-                <div *ngFor="let user of usersForConversationCreation" id="user" (click)="deleteUserFromCreateListAndMoveToAvailable(user)">
-                    <div>
-                        <div>{{user.userName}}</div>
-                    </div>
-                </div>
+        </div>
+        <p style="top:10px; left:420px; position:absolute; font-size: large;">Users for conversation creation.</p>
+        <div id="to_container">            
+            <div *ngFor="let user of usersForConversationCreation" id="user" (click)="deleteUserFromCreateListAndMoveToAvailable(user)">
+                <div>{{user.userName}}</div>
             </div>
-            <button (click)="createConversation()">Add conversation</button>
-            <p>{{message}}</p>
+        </div>
+        <button id="add_button" (click)="createConversation()">Add conversation</button>
+        <div id="modal_in_modal" *ngIf="modalInModal">
+            <div id="message_panel">
+                <p style="display: flex; align-items: center; justify-content: center; margin:50px;">{{message}}</p>
+                <button id="ok" (click)="closeInModal()">Ok</button>
+            </div>
         </div>
     </div>
 </div>

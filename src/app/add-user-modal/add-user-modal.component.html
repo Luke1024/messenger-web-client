@@ -11,9 +11,11 @@
     </div>
     <div id="modal_in_modal" *ngIf="modalInModal">
         <div id="window_in">
-            <div>{{userToAdd.userName}}</div>
-            <button class="button" id="add" (click)="add()">Add</button>
-            <button class="button" id="cancel" (click)="cancel()">Cancel></button>
+            <div style="margin:50px; text-align: center;">Do you want to add user {{userToAdd.userName}} to contacts?</div>
+            <div style="top: 70%; left: 50%; transform: translate(-50%, -70%); position:fixed;">
+                <button class="button" id="add" (click)="add()">Add</button>
+                <button class="button" id="cancel" (click)="cancel()">Cancel</button>
+            </div>
             <p>{{message}}</p>
         </div>    
     </div>

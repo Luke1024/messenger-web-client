@@ -14,6 +14,7 @@ export class AddConversationModalComponent implements OnInit {
   usersForConversationCreation:UserDto[] = [];
   loaded:boolean = false;
   message:string = "";
+  modalInModal:boolean = false;
 
   constructor(
     private messaging:MessagingService,
@@ -46,8 +47,13 @@ export class AddConversationModalComponent implements OnInit {
       if(response.status){
         this.closeModal();
       } else {
+        this.modalInModal = true;
         this.message = response.message;
       }
     })
+  }
+
+  closeInModal() {
+    this.modalInModal = false;
   }
 }
