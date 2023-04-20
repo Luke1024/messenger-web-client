@@ -1,16 +1,28 @@
-<div id="container">
-    <p *ngIf="loginView">Login user</p>
-    <p *ngIf="registerView">Register user</p>
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" [(ngModel)]="userDataDto.userName">
+<div id="window">
+    <div id="container">
+        <div id="title">
+            <p *ngIf="loginView">Login user</p> 
+            <p *ngIf="registerView">Register user</p>
+        </div>
+        <div id="forms">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="userDataDto.userName">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" id="password" [(ngModel)]="userDataDto.password">
+            </div>
+        </div>
+        <div id="buttons">
+            <div *ngIf="loginView">
+                <button (click)="loginUser()">Login</button> 
+                <button (click)="switchToRegister()">Switch to register form</button>
+            </div>
+            <div *ngIf="registerView">
+               <button (click)="registerUser()">Register</button>
+                <button (click)="switchToLogin()">Switch to login form</button>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">password</label>
-        <input type="text" class="form-control" id="password" [(ngModel)]="userDataDto.password">
-    </div>
-    <button *ngIf="loginView" id="button" (click)="loginUser()">Login</button>
-    <button *ngIf="registerView" id="button" (click)="registerUser()">Register</button>
-    <button *ngIf="loginView" id="button" (click)="switchToRegister()">Switch to register form</button>
-    <button *ngIf="registerView" id="button" (click)="switchToLogin()">Switch to login form></button>
 </div>
