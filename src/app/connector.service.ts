@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { MessageDto } from './model/message-dto';
 import { BatchDto } from './model/batch-dto';
 import { AddConversationResponse } from './model/add-conversation-response';
+import { AuthorizationResponseDto } from './model/authorization-response-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -44,21 +45,21 @@ export class ConnectorService {
     })
   }
 
-  registerUser(userDataDto:UserDataDto):Observable<boolean> {
+  registerUser(userDataDto:UserDataDto):Observable<AuthorizationResponseDto> {
     return new Observable(observer => {
-      this.http.post<boolean>(this.registerUserUrl, userDataDto, {observe:'response'}).pipe(catchError(this.handleError("register"))).subscribe(
+       this.http.post<AuthorizationResponseDto>(this.registerUserUrl, userDataDto).pipe(catchError(this.handleError("register"))).subscribe(
         response => {
-          observer.next(this.booleanResponse(response));
+          observer.next(response as AuthorizationResponseDto);
         }
-      )
+       );
     })
   }
 
-  loginUser(userDataDto:UserDataDto):Observable<boolean> {
+  loginUser(userDataDto:UserDataDto):Observable<AuthorizationResponseDto> {
     return new Observable(observer => {
-      this.http.post<boolean>(this.loginUrl, userDataDto, {observe:'response', withCredentials:true}).pipe(catchError(this.handleError("login"))).subscribe(
+      this.http.post<AuthorizationResponseDto>(this.loginUrl, userDataDto, {withCredentials:true}).pipe(catchError(this.handleError("login"))).subscribe(
         response => {
-          observer.next(this.booleanResponse(response));
+          observer.next(response as AddConversationResponse);
         }
       )
     })

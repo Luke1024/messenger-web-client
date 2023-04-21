@@ -26,3 +26,9 @@
         </div>
     </div>
 </div>
+<div id="window" *ngIf="problem" style="z-index: 2;">
+    <div id="modal" >
+        <p id="problem_message">{{message}}</p>
+        <button id="close_button" (click)="close()">Ok</button>
+    </div>
+</div>
