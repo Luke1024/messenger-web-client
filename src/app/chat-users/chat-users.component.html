@@ -1,7 +1,8 @@
 <div>
-    <ul ngbNav [(activeId)]="activepanel" class="nav-tabs">
+    <div>
+    <ul ngbNav [(activeId)]="activepanel" class="nav-pills" orientation="vertical">
         <li [ngbNavItem]="'users'">
-          <a ngbNavLink>Users</a>
+          <a ngbNavLink>Contacts</a>
         </li>
         <li [ngbNavItem]="'conversation'">
           <a ngbNavLink>Conversations</a>
@@ -10,24 +11,29 @@
             <a ngbNavLink>Add</a>
         </li>
       </ul>
-    <div *ngIf="activepanel=='users'">
+    </div>
+    <div *ngIf="activepanel=='users'" id="panel">
         <div *ngFor="let status of singleUserConversations">
             <div id="conversation" (click)="getConversation(status.conversationId)">
                 <p>{{status.users}}</p>
-                <p>{{status.waitingMessages}}</p>
+                <div id="message_counter">
+                    <p id="counter">{{status.waitingMessages}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="activepanel=='conversation'">
+    <div *ngIf="activepanel=='conversation'" id="panel">
         <div *ngFor="let status of multiUserConversations">
             <div id="conversation" (click)="getConversation(status.conversationId)">
                 <p>{{status.users}}</p>
-                <p>{{status.waitingMessages}}<p>
+                <div id="message_counter">
+                    <p id="counter">{{status.waitingMessages}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="activepanel=='add'">
-        <button type="button" class="btn btn-primary" (click)="openUserAddingModal()">Add user</button>
-        <button type="button" class="btn btn-primary" (click)="openConversationModal()">Add conversation</button>
+    <div *ngIf="activepanel=='add'" id="buttons">
+        <button (click)="openUserAddingModal()">Add user</button>
+        <button (click)="openConversationModal()">Add conversation</button>
     </div>
 </div>

@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit {
   private runUpdating(){
     setInterval(()=> {
       this.checkIfSomethingNew();
-    },5000)
+    },1000)
   }
 
   private checkIfSomethingNew(){

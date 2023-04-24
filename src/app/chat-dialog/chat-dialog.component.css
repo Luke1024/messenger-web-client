@@ -4,10 +4,13 @@
     padding:20px;
     border-radius: 10px;
     color: rgb(199, 199, 199);
+    width: 70%;
+    float:left;
 }
 
 .byuser {
     background-color: blue;
+    float:right;
 }
 
 #dialogarea {
