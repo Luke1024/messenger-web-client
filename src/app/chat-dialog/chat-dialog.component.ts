@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { ConnectorService } from '../connector.service';
 import { MessagingService } from '../messaging.service';
 import { BatchDto } from '../model/batch-dto';
@@ -15,6 +15,8 @@ import { SendMessageDto } from '../model/send-message-dto';
   styleUrls: ['./chat-dialog.component.css']
 })
 export class ChatDialogComponent implements OnInit {
+
+  @ViewChild('messages') private messages!:ElementRef
 
   constructor(private connector:ConnectorService,
      private messagingService:MessagingService) { }

@@ -1,5 +1,5 @@
 <div>
-    <div id="dialogarea">
+    <div id="dialogarea" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messageBatches.length > 0">
         <div id="batch" *ngFor="let messageBatch of messageBatches;">
             <div class="message" *ngFor="let message of messageBatch.messageDtoList" [class.byuser]="message.byUserReceiving">
                 <p>{{message.send}}</p>  
